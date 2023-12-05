@@ -5,7 +5,7 @@ function App() {
 
   const [data, setData] = useState({ quantity: '', price: '', margin: '', discount: '', tax: '' });
   const [data2, setData2] = useState([]);
-  
+
   console.log(data, "data")
   console.log(data2, "data2")
   // console.log(data2[0]?.quantity, "one")
@@ -20,24 +20,24 @@ function App() {
     }
   }
 
-  // function handleSubmit2(event) {
-  //   event.preventDefault();
-  //   // if (data.quantity && data.price && data.margin && data.discount && data.tax) {
-  //   setData2([...data2, data])
-  //   setData({ quantity: '', price: '', margin: '', discount: '', tax: '' })
-  //   // } else {
-  //   // alert("All fields are mandatory")
-  //   // }
-  // }
+  function handleSubmit2(event) {
+    event.preventDefault();
+    // if (data.quantity && data.price && data.margin && data.discount && data.tax) {
+    setData2([...data2, data])
+    setData({ quantity: '', price: '', margin: '', discount: '', tax: '' })
+    // } else {
+    // alert("All fields are mandatory")
+    // }
+  }
 
   function handleChange(event) {
     setData({ ...data, [event.target.name]: event.target.value })
   }
 
-  // function handleChange2(event) {
-  //   setData({ ...data, [event.target.name]: event.target.value })
-  //   // handleSubmit2(event)
-  // }
+  function handleChange2(event) {
+    setData({ ...data, [event.target.name]: event.target.value })
+    // handleSubmit2(event)
+  }
 
   return (
     <div className="App">
