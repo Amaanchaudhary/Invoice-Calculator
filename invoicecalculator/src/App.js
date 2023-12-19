@@ -1,14 +1,15 @@
 import './App.css';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 function App() {
 
   const [data, setData] = useState({ quantity: '', price: '', margin: '', discount: '', tax: '' });
+  // const [data3, setData3] = useState({ quantity2: '', price2: '', margin2: '', discount2: '', tax2: '' });
   const [data2, setData2] = useState([]);
 
   console.log(data, "data")
   console.log(data2, "data2")
-  // console.log(data2[0]?.quantity, "one")
+  // console.log(data3, "data3")
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -20,24 +21,22 @@ function App() {
     }
   }
 
-  function handleSubmit2(event) {
-    event.preventDefault();
-    // if (data.quantity && data.price && data.margin && data.discount && data.tax) {
-    setData2([...data2, data])
-    setData({ quantity: '', price: '', margin: '', discount: '', tax: '' })
-    // } else {
-    // alert("All fields are mandatory")
-    // }
-  }
 
   function handleChange(event) {
     setData({ ...data, [event.target.name]: event.target.value })
   }
 
-  function handleChange2(event) {
-    setData({ ...data, [event.target.name]: event.target.value })
-    // handleSubmit2(event)
+  function handleChange2( i , event){
+    // console.log(i, "index")
+    const updatedData = [...data2];
+    const { name, value } = event.target;
+    updatedData[i][name] = value;
+    setData2(updatedData);
   }
+
+  useEffect(() => {
+    
+  },[data2])
 
   return (
     <div className="App">
@@ -76,15 +75,15 @@ function App() {
 
           {data2?.map((item, i) => (
             <tr key={i}>
-              <td><input type='number' name='quantity2' value={item.quantity} onChange={handleChange2} /></td>
-              <td><input type='number' name='price2' value={item.price} onChange={handleChange2}/></td>
-              <td><input type='number' name='margin2' value={item.margin} onChange={handleChange2} /></td>
+              <td><input type='number' name='quantity' value={item.quantity} onChange={(event) => handleChange2(i , event)} /></td>
+              <td><input type='number' name='price' value={item.price} onChange={(event) => handleChange2(i , event)}/></td>
+              <td><input type='number' name='margin' value={item.margin} onChange={(event) => handleChange2(i , event)} /></td>
               <td>{item.price * item.quantity * (item.margin / 100)}</td>
               <td>{parseInt(item.price) + parseInt(item.price * item.quantity * (item.margin / 100))}</td>
               <td>{parseInt(item.quantity) * (parseInt(item.price) + parseInt(item.price * item.quantity * (item.margin / 100)))}</td>
-              <td><input type='number' name='discount2' value={item.discount} onChange={handleChange2} /></td>
+              <td><input type='number' name='discount' value={item.discount} onChange={(event) => handleChange2(i , event)} /></td>
               <td>{(parseInt(item.quantity) * (parseInt(item.price) + parseInt(item.price * item.quantity * (item.margin / 100)))) * item.discount/100}</td>
-              <td><input type='number' name='tax2' value={item.tax} onChange={handleChange2} /></td>
+              <td><input type='number' name='tax' value={item.tax} onChange={(event) => handleChange2(i , event)} /></td>
               <td>{(parseInt(item.quantity) * (parseInt(item.price) + parseInt(item.price * item.quantity * (item.margin / 100)))) * (item.tax/100)}</td>
               <td>{(parseInt(item.quantity) * (parseInt(item.price) + parseInt(item.price * item.quantity * (item.margin / 100)))) - ((parseInt(item.quantity) * (parseInt(item.price) + parseInt(item.price * item.quantity * (item.margin / 100)))) * item.discount/100) + ((parseInt(item.quantity) * (parseInt(item.price) + parseInt(item.price * item.quantity * (item.margin / 100)))) * (item.tax/100))}/-</td>
             </tr>
