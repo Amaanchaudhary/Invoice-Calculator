@@ -28,9 +28,12 @@ function App() {
 
   function handleChange2( i , event){
     // console.log(i, "index")
-    const updatedData = [...data2];
+    const updatedData = [...data2];  
+    // console.log(updatedData, "updated")
     const { name, value } = event.target;
+    // console.log(value , "name")
     updatedData[i][name] = value;
+    // console.log(updatedData[i][name] , 'a')
     setData2(updatedData);
   }
 
@@ -56,7 +59,7 @@ function App() {
           <input type='submit' value='Calculate' /><br />
         </form>
       </div>
-
+    {data2?.length ? 
       <div className='display'>
         <table>
           <tr>
@@ -89,7 +92,8 @@ function App() {
             </tr>
           ))}
         </table>
-      </div>
+      </div> : <div><h2>No Records</h2></div>
+}
     </div>
   );
 }
