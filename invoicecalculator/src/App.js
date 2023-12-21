@@ -26,9 +26,9 @@ function App() {
     setData({ ...data, [event.target.name]: event.target.value })
   }
 
-  function handleChange2( i , event){
+  function handleChange2(i, event) {
     // console.log(i, "index")
-    const updatedData = [...data2];  
+    const updatedData = [...data2];
     // console.log(updatedData, "updated")
     const { name, value } = event.target;
     // console.log(value , "name")
@@ -38,8 +38,8 @@ function App() {
   }
 
   useEffect(() => {
-    
-  },[data2])
+
+  }, [data2])
 
   return (
     <div className="App">
@@ -56,44 +56,45 @@ function App() {
           <input type='number' name='discount' onChange={handleChange} value={data.discount} /><br />
           <label>Tax %</label><br />
           <input type='number' name='tax' onChange={handleChange} value={data.tax} /><br /><br />
-          <input type='submit' value='Calculate' /><br />
+          <input type='submit' value='Calculate' className='submitbutton' /><br />
         </form>
       </div>
-    {data2?.length ? 
-      <div className='display'>
-        <table>
-          <tr>
-            <th>Quantity</th>
-            <th>Cost Price</th>
-            <th>Margin %</th>
-            <th>Margin</th>
-            <th>Sales Price</th>
-            <th>Total Sales Price</th>
-            <th>Discount %</th>
-            <th>Discount</th>
-            <th>Tax %</th>
-            <th>Tax</th>
-            <th>Final sales price</th>
-          </tr>
-
-          {data2?.map((item, i) => (
-            <tr key={i}>
-              <td><input type='number' name='quantity' value={item.quantity} onChange={(event) => handleChange2(i , event)} /></td>
-              <td><input type='number' name='price' value={item.price} onChange={(event) => handleChange2(i , event)}/></td>
-              <td><input type='number' name='margin' value={item.margin} onChange={(event) => handleChange2(i , event)} /></td>
-              <td>{item.price * item.quantity * (item.margin / 100)}</td>
-              <td>{parseInt(item.price) + parseInt(item.price * item.quantity * (item.margin / 100))}</td>
-              <td>{parseInt(item.quantity) * (parseInt(item.price) + parseInt(item.price * item.quantity * (item.margin / 100)))}</td>
-              <td><input type='number' name='discount' value={item.discount} onChange={(event) => handleChange2(i , event)} /></td>
-              <td>{(parseInt(item.quantity) * (parseInt(item.price) + parseInt(item.price * item.quantity * (item.margin / 100)))) * item.discount/100}</td>
-              <td><input type='number' name='tax' value={item.tax} onChange={(event) => handleChange2(i , event)} /></td>
-              <td>{(parseInt(item.quantity) * (parseInt(item.price) + parseInt(item.price * item.quantity * (item.margin / 100)))) * (item.tax/100)}</td>
-              <td>{(parseInt(item.quantity) * (parseInt(item.price) + parseInt(item.price * item.quantity * (item.margin / 100)))) - ((parseInt(item.quantity) * (parseInt(item.price) + parseInt(item.price * item.quantity * (item.margin / 100)))) * item.discount/100) + ((parseInt(item.quantity) * (parseInt(item.price) + parseInt(item.price * item.quantity * (item.margin / 100)))) * (item.tax/100))}/-</td>
+      {data2?.length ?
+        <div className='display'>
+          <table>
+            <tr>
+              <th>Quantity</th>
+              <th>Cost Price</th>
+              <th>Total Margin %</th>
+              <th>Overall Margin</th>
+              <th>Sales Price per unit</th>
+              <th>Total Sales Price</th>
+              <th>Total Discount %</th>
+              <th>Total Discount</th>
+              <th>Total Tax %</th>
+              <th>Total Tax</th>
+              <th>Final sales price</th>
             </tr>
-          ))}
-        </table>
-      </div> : <div><h2>No Records</h2></div>
-}
+
+            {data2?.map((item, i) => (
+              <tr key={i}>
+                <td><input type='number' name='quantity' value={item.quantity} onChange={(event) => handleChange2(i, event)} /></td>
+                <td><input type='number' name='price' value={item.price} onChange={(event) => handleChange2(i, event)} /></td>
+                <td><input type='number' name='margin' value={item.margin} onChange={(event) => handleChange2(i, event)} /></td>
+                <td>₹ {(item.price * item.quantity * (item.margin / 100)).toFixed(2)}</td>
+                {/* <td>{parseFloat(item.price) + parseFloat(item.price * item.quantity * (item.margin / 100))}</td> */}
+                <td>₹ {((parseFloat(item.price) + parseFloat(item.price * (item.margin / 100)))).toFixed(2)}</td>
+                <td>₹ {(parseFloat(item.quantity) * (parseFloat(item.price) + parseFloat(item.price * (item.margin / 100)))).toFixed(2)}</td>
+                <td><input type='number' name='discount' value={item.discount} onChange={(event) => handleChange2(i, event)} /></td>
+                <td>₹ {(((parseFloat(item.quantity) * (parseFloat(item.price) + parseFloat(item.price * (item.margin / 100)))) * item.discount / 100).toFixed(2))}</td>
+                <td><input type='number' name='tax' value={item.tax} onChange={(event) => handleChange2(i, event)} /></td>
+                <td>₹ {((parseFloat(item.quantity) * (parseFloat(item.price) + parseFloat(item.price * (item.margin / 100)))) * (item.tax / 100)).toFixed(2)}</td>
+                <td>{((parseFloat(item.quantity) * (parseFloat(item.price) + parseFloat(item.price * (item.margin / 100)))) - ((parseFloat(item.quantity) * (parseFloat(item.price) + parseFloat(item.price * item.quantity * (item.margin / 100)))) * item.discount / 100) + ((parseFloat(item.quantity) * (parseFloat(item.price) + parseFloat(item.price * item.quantity * (item.margin / 100)))) * (item.tax / 100))).toFixed(2)}/-</td>
+              </tr>
+            ))}
+          </table>
+        </div> : <div><h2>No Records</h2></div>
+      }
     </div>
   );
 }
