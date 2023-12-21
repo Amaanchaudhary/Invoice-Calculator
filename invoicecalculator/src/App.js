@@ -4,12 +4,10 @@ import React, { useEffect, useState } from 'react'
 function App() {
 
   const [data, setData] = useState({ quantity: '', price: '', margin: '', discount: '', tax: '' });
-  // const [data3, setData3] = useState({ quantity2: '', price2: '', margin2: '', discount2: '', tax2: '' });
   const [data2, setData2] = useState([]);
 
   console.log(data, "data")
   console.log(data2, "data2")
-  // console.log(data3, "data3")
 
   function handleSubmit(event) {
     event.preventDefault();
