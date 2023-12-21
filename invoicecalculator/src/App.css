@@ -1,19 +1,30 @@
 .App {
   text-align: center;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   width: 100%;
   height: 1000px;
 }
 .form{
   text-align: center;
   /* border: 1px solid black; */
-  width: 30%;
-  height: 350px;
+  width: 50%;
+  height: fit-content;
   margin: auto;
   margin-top: 10px;
   margin-bottom: 40px;
-  background-color:blue;
+  background-color:wheat;
   box-shadow: 5px 5px 5px 1px grey;
+}
+.index{
+  display: none;
+}
+*{ 
+  box-sizing: border-box;
+}
+
+.form >  form > input{
+  width: 50%;
+  /* border: 2px solid black; */
 }
 .display{
   text-align: center;
@@ -36,14 +47,21 @@ form > label{
   cursor: pointer;
 }
 .display > table{
-  border: 1px solid black;
+  border: 1px solid black; 
+  width: 100%;
 }
-.display > table > tr > th , td{
+.display > table > tbody > tr:nth-child(even){
+    background-color: #f5f5f5;
+}
+
+.display > table > thead >  tr > th , td{
   border: 1px solid black;
   width: 100px;
 }
-.display > table > tr > td > input{
-  width: 100px;
+
+.responsive-table  input{
+  width : 80%;
+  border: 1px solid black;
 }
 
 .Heading{
@@ -85,5 +103,76 @@ form > label{
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+@media screen and (max-width : 650px){
+  .form{
+    text-align: center;
+    /* border: 1px solid black; */
+    width: 80%;
+    height: fit-content;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    background-color:wheat;
+    box-shadow: 5px 5px 5px 1px grey;
+    padding-bottom: 30px;
+    padding-top: 30px;
+  }
+  .App{
+    width: 100%;
+  }
+  
+  .index{
+    display: block;
+    text-align: left;
+    height: 5px;
+  }
+
+  /* .responsive-table , .display{
+    overflow-x: auto;
+    width: 100%;  
+  } */
+
+  .display{
+    width: 80%;
+  }
+
+  .display > table{
+    border: none; 
+    width: 100%;
+  }
+  .responsive-table > thead{
+    display: none;
+  } 
+
+  .responsive-table, .responsive-table tbody , .responsive-table tr , .responsive-table td{
+    display: block;
+  }
+
+  .responsive-table tr{
+    margin-bottom: 50px;
+    width: 85%;
+  }
+
+  .responsive-table td{
+    text-align: right;
+    padding-left: 70%;
+    position: relative;
+    height: 40px;
+    /* line-height: 25px; */
+    width: 120%;
+  }
+
+  .responsive-table td::before{
+    content: attr(data-label) ;
+    position: absolute;
+    left: 0;
+    width: 50%;
+    padding-left: 15px;
+    text-align: left;
+    font-size: 15px;
+    font-weight: bold;
   }
 }
